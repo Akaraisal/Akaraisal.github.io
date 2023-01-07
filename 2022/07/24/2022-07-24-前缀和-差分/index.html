@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>前缀和&amp;差分 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="前缀和来一道二维前缀和的模板题 (简单但有点坑): AcWing 99 激光炸弹Link 坑点 1: 不同目标可能在同一位置, 也就是说可能两次输入的是同一坐标点处的权值, 所以要 w[i][j]+&#x3D;a; 坑点 2: 输入的 x,y 的范围是从 0 开始的, 而我们二维前缀和的矩阵是从 1 开始的, 所以要 w[++x][++y]; 12345678910111213141516171819202">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前缀和&amp;差分">
+<meta property="og:url" content="http://example.com/2022/07/24/2022-07-24-%E5%89%8D%E7%BC%80%E5%92%8C-%E5%B7%AE%E5%88%86/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="前缀和来一道二维前缀和的模板题 (简单但有点坑): AcWing 99 激光炸弹Link 坑点 1: 不同目标可能在同一位置, 也就是说可能两次输入的是同一坐标点处的权值, 所以要 w[i][j]+&#x3D;a; 坑点 2: 输入的 x,y 的范围是从 0 开始的, 而我们二维前缀和的矩阵是从 1 开始的, 所以要 w[++x][++y]; 12345678910111213141516171819202">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-07-24T12:33:37.000Z">
+<meta property="article:modified_time" content="2022-08-21T08:10:12.733Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="notes">
+<meta property="article:tag" content="前缀和">
+<meta property="article:tag" content="algorithm">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-2022-07-24-前缀和-差分" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/07/24/2022-07-24-%E5%89%8D%E7%BC%80%E5%92%8C-%E5%B7%AE%E5%88%86/" class="article-date">
+  <time class="dt-published" datetime="2022-07-24T12:33:37.000Z" itemprop="datePublished">2022-07-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/">刷题</a>►<a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/ACM/">ACM</a>►<a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/ACM/%E6%96%87%E7%AB%A0/">文章</a>►<a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/ACM/%E6%96%87%E7%AB%A0/AcWing/">AcWing</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      前缀和&amp;差分
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="前缀和"><a href="#前缀和" class="headerlink" title="前缀和"></a>前缀和</h2><p>来一道二维前缀和的模板题 (简单但有点坑):</p>
+<h3 id="AcWing-99-激光炸弹"><a href="#AcWing-99-激光炸弹" class="headerlink" title="AcWing 99 激光炸弹"></a>AcWing 99 激光炸弹</h3><p><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/101/">Link</a></p>
+<p>坑点 1: 不同目标可能在同一位置, 也就是说可能两次输入的是同一坐标点处的权值, 所以要 <code>w[i][j]+=a</code>;</p>
+<p>坑点 2: 输入的 <code>x,y</code> 的范围是从 0 开始的, 而我们二维前缀和的矩阵是从 1 开始的, 所以要 <code>w[++x][++y]</code>;</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">5010</span>;</span><br><span class="line"><span class="type">int</span> n,r,x,y,a,ans;</span><br><span class="line"><span class="type">int</span> w[N+<span class="number">10</span>][N+<span class="number">10</span>];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;n,&amp;r);</span><br><span class="line">    r=<span class="built_in">min</span>(r,N);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;++i)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>,&amp;x,&amp;y,&amp;a);</span><br><span class="line">        w[++x][++y]+=a;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=N;++i)</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=N;++j)</span><br><span class="line">            w[i][j]+=w[i<span class="number">-1</span>][j]+w[i][j<span class="number">-1</span>]-w[i<span class="number">-1</span>][j<span class="number">-1</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=r;i&lt;=N;++i)</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=r;j&lt;=N;++j)</span><br><span class="line">            ans=<span class="built_in">max</span>(ans,w[i][j]-w[i-r][j]-w[i][j-r]+w[i-r][j-r]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="差分"><a href="#差分" class="headerlink" title="差分"></a>差分</h2><h3 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h3><p>差分板子 (实际上是 忘记这是哪道题的代码了):</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">int</span> n,p,x,y,z,ans=<span class="number">0x3f3f3f3f</span>;</span><br><span class="line"><span class="type">int</span> a[<span class="number">5000010</span>];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;n,&amp;p);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;++i)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;a[i]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=n;i&gt;=<span class="number">1</span>;--i)</span><br><span class="line">        a[i]-=a[i<span class="number">-1</span>];</span><br><span class="line">    <span class="keyword">while</span>(p--)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>,&amp;x,&amp;y,&amp;z);</span><br><span class="line">        a[x]+=z;</span><br><span class="line">        a[y+<span class="number">1</span>]-=z;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;++i)&#123;</span><br><span class="line">        a[i]+=a[i<span class="number">-1</span>];</span><br><span class="line">        ans=<span class="built_in">min</span>(ans,a[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="AcWing-100-增减序列"><a href="#AcWing-100-增减序列" class="headerlink" title="AcWing 100 增减序列"></a>AcWing 100 增减序列</h3><p><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/102/">Link</a></p>
+<p>这题想清楚了就会豁然开朗.</p>
+<p>都知道是差分+贪心. 具体应该这么去想: 对于相邻的两个数 <code>a[i]</code> 和 <code>a[i-1]</code>, 如果 <code>a[i]</code> 大于 <code>a[i-1]</code>, 那么想要 <code>a[i]</code> 等于 <code>a[i-1]</code> 就只能增大 <code>a[i-1]</code>、减小 <code>a[i]</code>, 而 <code>a[i]</code> 的增加量的绝对值加上 <code>a[i-1]</code> 的减少量的绝对值就是 <code>a[i]</code> 和 <code>a[i-1]</code> 的差值的绝对值. 另一种情况同理.</p>
+<p>我们的目的是要将整个序列变成相等的, 那么就是要让差分数组全部变为 0. 假设原数组的差分数组是 <code>p</code>, 如果 <code>p[i]&gt;0</code>, 那么它肯定是要被减去 <code>p[i]</code> 的, 至于怎么减去的我们现在无法确定; 如果 <code>p[i]&lt;0</code>, 那么它肯定是要被加上 <code>-p[i]</code> 的. 再联系一下差分数组和原数组区间和对关系, 容易想到正负配对来确定一个操作区间, 这样可以让原本要进行两次以上的操作合为一次.</p>
+<p>举个🌰, 我们假设差分数组中恰好出现了 <code>p[i]=-3,p[j]=4</code>, 那么很容易想到可以对区间 <code>[i,j-1]</code> 进行加 3 操作, 于是 <code>p[i]=0,p[j]=1</code>. 如果不这么做, 那就要先对区间 <code>[i,i+1]</code> 进行加 3 操作, 再对 <code>[j,j+1]</code> 进行减 4 操作, 这样虽然让 <code>p[i]</code> 和 <code>p[j]</code> 为 0 了, 但是 <code>i</code> 和 <code>j</code> 之间的数彼此之间的差分却还不一定为 0.</p>
+<p>利用贪心的思想很容易论证正负配对的最优性. 那么问题来了, 刚才虽然配对了 -3 和 4, 但是 4 还残留了 1 怎么办? 很简单, 再去看看有没有 -1 或者其他负数可以配对. 如果没有, 就只能对 <code>p[j]</code> 所代表的区间进行其他处理了.</p>
+<p>也就是说, 配对结束后, 剩下的全都是像 <code>p[j]</code> 这样的残留物, 并且最后差分就只剩同符号的数 (如果有异号就说明还可以继续配对), 即所有的 <code>p[j]</code> 全都同号.</p>
+<p>正负配对抵消的操作共有 <code>min(pos,neg)</code> 次, 假设正数比较多, 那么负数配对完之后剩下的就全都是正数. 这里的 <code>pos</code> 是 <code>p</code> 中正数的个数, <code>neg</code> 是负数的个数.</p>
+<p>最终结果可能依然不是全 0 的, 因为 <code>abs(sum(正数))</code> 可能不等于 <code>abs(sum(负数))</code>.</p>
+<p>最后不等于 0 的数 (即剩下的同符号的数) 只能通过 <code>p[1]</code> 或 <code>p[n+1]</code> 这两个对差分数组没有影响的差分来一个一个地把自己减为 0 (<code>p[1]</code> 是 <code>a[1]</code> 和 <code>a[0]</code> 的差分, <code>p[n+1]</code> 是 <code>a[n+1]</code> 和 <code>a[n]</code> 的差分, 而数组范围是 <code>[1,n]</code>. 例如通过 <code>p[1]</code> 把 <code>p[j]=1</code> 变成 <code>p[j]=0</code> 的步骤是: <code>p[1]+=1,p[j]-=1</code>. 意思是把原数组区间 <code>[1,j-1]</code> 中的数全都加 1, 其他的数保持不变).</p>
+<p>对所有 <code>j</code> 属于 <code>[2,n]</code> 且 <code>p</code> 值不为 0 的 <code>p[j]</code> 而言, 通过 <code>p[1]</code> 把自己变成 0 后, 差分数组 <code>p</code> 就已经全部为 0, 原数组的所有元素也就全部相等了.</p>
+<p>这一步的操作共有 <code>abs(pos-neg)</code> 次, 按照刚才正数比较多的假设, 这就是把剩下的没有匹配到负数的正数全都处理完.</p>
+<p>因此 <code>ans1=min(pos,neg)+abs(pos−neg)=max(pos,neg)</code>.</p>
+<p>实际上, 仔细想想就会发现, 如果我们当初对所有剩下的没有被匹配的 <code>p[j]</code> 都<strong>只用</strong> <code>p[1]</code> 或<strong>只用</strong> <code>p[n+1]</code> 来处理, 那么最后原数组全部相等时的元素值其实就是 <code>p[1]</code> (因为 <code>p[1]=a[1]−a[0]=a[1]</code>) 或 <code>-p[n+1]</code> (因为 <code>p[n+1]=a[n+1]−a[n]=-a[n]</code>).</p>
+<p>注意题目中所说的“在保证最少次数的前提下, 最终得到的数列可能有多少种”的意思是, 最后全部相等的数组元素可以不止一种. 这很显然啊, 因为我们当初既可以对所有剩下的没有被匹配的 <code>p[j]</code> 都用 <code>p[1]</code> 来处理, 也可以都用 <code>p[n+1]</code> 来处理, 甚至可以<strong>一部分用 <code>p[1]</code>、一部分 <code>p[n+1]</code> 来处理</strong>, 这样就可以得到多种结果. 也就是说, 我们对 <code>p[1]</code> 和 <code>p[n+1]</code> 的操作次数之和就是剩下的没有被匹配的 <code>p[j]</code> 的个数.</p>
+<p>之前正负匹配的时候, 我们只是对负数和正数对进行操作, 所以 <code>p[1]</code> 和 <code>p[n+1]</code> 都没有变, 变的是 <code>p[2]~p[n]</code>. 然后差分数组就只剩下同符号的数, 此时有两种方案:</p>
+<ol>
+<li><code>p[1]+=1,p[j]-=1</code>;</li>
+<li><code>p[j]-=1,p[n+1]+=1</code>.</li>
+</ol>
+<p>只用 <code>p[1]</code> 或只用 <code>p[n+1]</code> 处理, 都只有一种结果, 因此现在有了 2 种不同结果; 而操作次数一共是 <code>abs(pos-neg)</code>, 因此可以分为:</p>
+<ul>
+<li>用 1 次 <code>p[1]</code>, 用 <code>abs(pos-neg)−1</code> 次 <code>p[n+1]</code>;</li>
+<li>用 2 次 <code>p[1]</code>, 用 <code>abs(pos-neg)−2</code> 次 <code>p[n+1]</code>;</li>
+<li>…</li>
+<li>用 <code>abs(pos-neg)−1</code> 次 <code>p[1]</code>, 用 1 次 <code>p[n+1]</code>.</li>
+</ul>
+<p>上面就又分出了 <code>abs(pos-neg)-1</code> 种方案.</p>
+<p>所以 <code>ans2=abs(pos-neg)-1+2=abs(pos-neg)+1</code>.</p>
+<p>现在懂了吧. AC 代码如下:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line">ll a[<span class="number">100010</span>],x,y,ans1,ans2;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;++i)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>,&amp;a[i]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>;i&lt;=n;++i)&#123;</span><br><span class="line">        ll p=a[i]-a[i<span class="number">-1</span>];</span><br><span class="line">        <span class="keyword">if</span>(p&gt;<span class="number">0</span>) x+=p;</span><br><span class="line">        <span class="keyword">else</span> y-=p;</span><br><span class="line">    &#125;</span><br><span class="line">    ans1=<span class="built_in">max</span>(x,y),ans2=<span class="built_in">abs</span>(x-y)+<span class="number">1</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lld\n%lld\n&quot;</span>,ans1,ans2);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/07/24/2022-07-24-%E5%89%8D%E7%BC%80%E5%92%8C-%E5%B7%AE%E5%88%86/" data-id="clcljm1i100274osb3ug254rx" data-title="前缀和&amp;差分" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/notes/" rel="tag">notes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" rel="tag">前缀和</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/07/24/2022-07-24-%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          欧拉函数
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/07/24/2022-07-24-tsp-%E9%97%AE%E9%A2%98/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">TSP 问题</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CS/">CS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mac/">Mac</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Utilities/">Utilities</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%B7%E9%A2%98/">刷题</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%B7%E9%A2%98/ACM/">ACM</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%B7%E9%A2%98/ACM/%E6%96%87%E7%AB%A0/">文章</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%B7%E9%A2%98/ACM/%E6%96%87%E7%AB%A0/AcWing/">AcWing</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%B7%E9%A2%98/AcWing/">AcWing</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%B7%E9%A2%98/AcWing/%E6%96%87%E7%AB%A0/">文章</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%B7%E9%A2%98/PAT/">PAT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%B7%E9%A2%98/%E9%A2%98%E5%8D%95/">题单</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%B7%E9%A2%98/%E9%A2%98%E5%8D%95/AcWing/">AcWing</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C/">网络</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E5%AD%A6/">数学</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%87%E7%AB%A0/">文章</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8B%B1%E8%AF%AD/">英语</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8B%B1%E8%AF%AD/TED/">TED</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/">计算机体系结构</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%AD%E8%A8%80/">语言</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%AD%E8%A8%80/C-C/">C/C++</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/01%E8%83%8C%E5%8C%85/" rel="tag">01背包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AVL/" rel="tag">AVL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BFS/" rel="tag">BFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BST/" rel="tag">BST</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dijkstra/" rel="tag">Dijkstra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STL/" rel="tag">STL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TSP/" rel="tag">TSP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/" rel="tag">dp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/knapsack/" rel="tag">knapsack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/latex/" rel="tag">latex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/notes/" rel="tag">notes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/palindrome/" rel="tag">palindrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reading/" rel="tag">reading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/snippets/" rel="tag">snippets</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/solutions/" rel="tag">solutions</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tarjan/" rel="tag">tarjan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/trie/" rel="tag">trie</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%93%E9%A2%98/" rel="tag">专题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/" rel="tag">个人项目</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%8C%E5%88%86/" rel="tag">二分</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E7%B1%BB%E8%AE%A8%E8%AE%BA/" rel="tag">分类讨论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" rel="tag">前缀和</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%BA%E9%97%B4%E9%97%AE%E9%A2%98/" rel="tag">区间问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" rel="tag">单调栈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%93%88%E5%B8%8C/" rel="tag">哈希</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E8%AE%BA/" rel="tag">图论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A0%86/" rel="tag">堆</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%90%E5%BA%8F%E5%88%97/" rel="tag">子序列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag">字符串</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" rel="tag">并查集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BA%8F%E5%85%B3%E7%B3%BB/" rel="tag">序关系</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%90%9C%E7%B4%A2/" rel="tag">搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%97%E7%BB%84%E5%90%88/" rel="tag">数字组合</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E8%AE%BA/" rel="tag">数论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/" rel="tag">最短路径</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%89%E5%9D%91/" rel="tag">有坑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%88/" rel="tag">栈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91/" rel="tag">树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/" rel="tag">树状数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A8%A1%E6%8B%9F/" rel="tag">模拟</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%AE%E7%82%B9%E6%95%B0/" rel="tag">浮点数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/" rel="tag">知识点</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%A2%E9%BB%91%E6%A0%91/" rel="tag">红黑树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag">线段树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/" rel="tag">组合数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B4%AA%E5%BF%83/" rel="tag">贪心</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%92%E5%BD%92/" rel="tag">递归</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%98%9F%E5%88%97/" rel="tag">队列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag">题解</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/01%E8%83%8C%E5%8C%85/" style="font-size: 10px;">01背包</a> <a href="/tags/AVL/" style="font-size: 10.77px;">AVL</a> <a href="/tags/BFS/" style="font-size: 10.77px;">BFS</a> <a href="/tags/BST/" style="font-size: 10px;">BST</a> <a href="/tags/DFS/" style="font-size: 16.15px;">DFS</a> <a href="/tags/Dijkstra/" style="font-size: 11.54px;">Dijkstra</a> <a href="/tags/STL/" style="font-size: 13.08px;">STL</a> <a href="/tags/TSP/" style="font-size: 10.77px;">TSP</a> <a href="/tags/algorithm/" style="font-size: 14.62px;">algorithm</a> <a href="/tags/dp/" style="font-size: 13.08px;">dp</a> <a href="/tags/knapsack/" style="font-size: 10.77px;">knapsack</a> <a href="/tags/latex/" style="font-size: 10px;">latex</a> <a href="/tags/notes/" style="font-size: 19.23px;">notes</a> <a href="/tags/palindrome/" style="font-size: 10px;">palindrome</a> <a href="/tags/reading/" style="font-size: 10px;">reading</a> <a href="/tags/snippets/" style="font-size: 11.54px;">snippets</a> <a href="/tags/solutions/" style="font-size: 10.77px;">solutions</a> <a href="/tags/tarjan/" style="font-size: 10px;">tarjan</a> <a href="/tags/trie/" style="font-size: 10px;">trie</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/%E4%B8%93%E9%A2%98/" style="font-size: 13.85px;">专题</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/" style="font-size: 10px;">个人项目</a> <a href="/tags/%E4%BA%8C%E5%88%86/" style="font-size: 10.77px;">二分</a> <a href="/tags/%E5%88%86%E7%B1%BB%E8%AE%A8%E8%AE%BA/" style="font-size: 10px;">分类讨论</a> <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 11.54px;">前缀和</a> <a href="/tags/%E5%8C%BA%E9%97%B4%E9%97%AE%E9%A2%98/" style="font-size: 10px;">区间问题</a> <a href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" style="font-size: 10px;">单调栈</a> <a href="/tags/%E5%93%88%E5%B8%8C/" style="font-size: 10px;">哈希</a> <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="font-size: 16.92px;">图论</a> <a href="/tags/%E5%A0%86/" style="font-size: 11.54px;">堆</a> <a href="/tags/%E5%AD%90%E5%BA%8F%E5%88%97/" style="font-size: 10.77px;">子序列</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 12.31px;">字符串</a> <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" style="font-size: 12.31px;">并查集</a> <a href="/tags/%E5%BA%8F%E5%85%B3%E7%B3%BB/" style="font-size: 10px;">序关系</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 12.31px;">排序</a> <a href="/tags/%E6%90%9C%E7%B4%A2/" style="font-size: 10.77px;">搜索</a> <a href="/tags/%E6%95%B0%E5%AD%97%E7%BB%84%E5%90%88/" style="font-size: 10px;">数字组合</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 15.38px;">数学</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 17.69px;">数据结构</a> <a href="/tags/%E6%95%B0%E8%AE%BA/" style="font-size: 11.54px;">数论</a> <a href="/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/" style="font-size: 13.08px;">最短路径</a> <a href="/tags/%E6%9C%89%E5%9D%91/" style="font-size: 11.54px;">有坑</a> <a href="/tags/%E6%A0%88/" style="font-size: 10.77px;">栈</a> <a href="/tags/%E6%A0%91/" style="font-size: 18.46px;">树</a> <a href="/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/" style="font-size: 10.77px;">树状数组</a> <a href="/tags/%E6%A8%A1%E6%8B%9F/" style="font-size: 11.54px;">模拟</a> <a href="/tags/%E6%B5%AE%E7%82%B9%E6%95%B0/" style="font-size: 11.54px;">浮点数</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/" style="font-size: 16.92px;">知识点</a> <a href="/tags/%E7%BA%A2%E9%BB%91%E6%A0%91/" style="font-size: 10px;">红黑树</a> <a href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" style="font-size: 10px;">线段树</a> <a href="/tags/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/" style="font-size: 10px;">组合数学</a> <a href="/tags/%E8%B4%AA%E5%BF%83/" style="font-size: 12.31px;">贪心</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10.77px;">递归</a> <a href="/tags/%E9%98%9F%E5%88%97/" style="font-size: 10px;">队列</a> <a href="/tags/%E9%A2%98%E8%A7%A3/" style="font-size: 20px;">题解</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/10/07/2022-10-07-ds%E5%A4%8D%E4%B9%A0-part-5/">DS复习 Part 5</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/05/2022-10-05-ds%E5%A4%8D%E4%B9%A0-part-4/">DS复习 Part 4</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/04/2022-10-04-ds%E5%A4%8D%E4%B9%A0-part-3/">DS复习 Part 3</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/03/2022-10-03-ds%E5%A4%8D%E4%B9%A0-part-2/">DS复习 Part 2</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/01/2022-10-01-ds%E5%A4%8D%E4%B9%A0-part-1/">DS复习 Part 1</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

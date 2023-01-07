@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>DS复习 Part 2 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Stack操作受限的线性表 (正因为是线性表所以肯定就有“顺序”和“链式”这两种存储方式). 只能在一端进行操作. LIFO. 数学性质: Catalan 数. n 个不同元素进栈, 出栈元素的不同排列的个数为 $\dfrac{1}{n+1}C_{2n}^n$. 答题时可以直接“调用”的函数:  void InitStack(&amp;S) bool StackEmpty(S) bool Push">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DS复习 Part 2">
+<meta property="og:url" content="http://example.com/2022/10/03/2022-10-03-ds%E5%A4%8D%E4%B9%A0-part-2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Stack操作受限的线性表 (正因为是线性表所以肯定就有“顺序”和“链式”这两种存储方式). 只能在一端进行操作. LIFO. 数学性质: Catalan 数. n 个不同元素进栈, 出栈元素的不同排列的个数为 $\dfrac{1}{n+1}C_{2n}^n$. 答题时可以直接“调用”的函数:  void InitStack(&amp;S) bool StackEmpty(S) bool Push">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-10-03T02:33:48.000Z">
+<meta property="article:modified_time" content="2022-10-03T07:50:01.267Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="notes">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-2022-10-03-ds复习-part-2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/10/03/2022-10-03-ds%E5%A4%8D%E4%B9%A0-part-2/" class="article-date">
+  <time class="dt-published" datetime="2022-10-03T02:33:48.000Z" itemprop="datePublished">2022-10-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/CS/">CS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      DS复习 Part 2
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h1><p>操作受限的线性表 (正因为是线性表所以肯定就有“顺序”和“链式”这两种存储方式). 只能在一端进行操作. LIFO.</p>
+<p>数学性质: <a target="_blank" rel="noopener" href="https://ssc.moe/posts/catalan-number-%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0/">Catalan 数</a>. n 个不同元素进栈, 出栈元素的不同排列的个数为 $\dfrac{1}{n+1}C_{2n}^n$.</p>
+<p>答题时可以直接“调用”的函数:</p>
+<ul>
+<li><code>void InitStack(&amp;S)</code></li>
+<li><code>bool StackEmpty(S)</code></li>
+<li><code>bool Push(&amp;S, x)</code></li>
+<li><code>bool Pop(&amp;S, &amp;x)</code></li>
+<li><code>bool GetTop(S, &amp;x)</code></li>
+<li><code>void DestroyStack(&amp;S)</code></li>
+</ul>
+<h2 id="顺序栈"><a href="#顺序栈" class="headerlink" title="顺序栈"></a>顺序栈</h2><p>数组存放, 用 <code>int top</code> 指示栈顶下标.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MAXSIZE 100</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> &#123;</span><br><span class="line">    ElemType data[MAXSIZE];</span><br><span class="line">    <span class="type">int</span> top;</span><br><span class="line">&#125; SqStack;</span><br></pre></td></tr></table></figure>
+
+<p><code>S.top</code> 处是存储元素的. 数组从下标 0 开始存储.</p>
+<ul>
+<li><code>S.top = -1</code> 时为空栈.</li>
+<li><code>S.top = MAXSIZE - 1</code> 时为满栈.</li>
+<li>栈长: <code>S.top + 1</code>.</li>
+<li>初始: <code>S.top = -1</code>.</li>
+<li>入栈: <code>S.data[++S.top] = x</code>.</li>
+<li>出栈: <code>x = S.data[S.top--]</code>.</li>
+</ul>
+<h3 id="共享栈"><a href="#共享栈" class="headerlink" title="共享栈"></a>共享栈</h3><p>利用了栈底位置相对不变的特点. 两个栈共享一个数组, 栈底设在数组两端, 栈顶向中间增长.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> &#123;</span><br><span class="line">    ElemType data[MAXSIZE];</span><br><span class="line">    <span class="type">int</span> top1;</span><br><span class="line">    <span class="type">int</span> top2;</span><br><span class="line">&#125; ShStack;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>top1 = -1</code> 时栈 1 为空栈.</li>
+<li><code>top2 = MAXSIZE</code> 时栈 2 为空栈.</li>
+<li><code>top1 + 1 = top2</code> 时为满栈.</li>
+<li>入栈: <code>S.data[++S.top1] = x</code> 或 <code>S.data[--S.top2] = x</code>.</li>
+<li>出栈: <code>x = S.data[S.top1--]</code> 或 <code>x = S.data[S.top2++]</code>.</li>
+</ul>
+<h2 id="链栈"><a href="#链栈" class="headerlink" title="链栈"></a>链栈</h2><p><code>Lhead</code> 指向栈顶元素.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">LinkNode</span> &#123;</span><br><span class="line">    ElemType data;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">LinkNode</span> *next;</span><br><span class="line">&#125; LinkNode;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> &#123;</span><br><span class="line">    LinkNode *top;</span><br><span class="line">    <span class="comment">// int count;</span></span><br><span class="line">&#125; LinkStack;</span><br></pre></td></tr></table></figure>
+
+<h2 id="需要注意的问题"><a href="#需要注意的问题" class="headerlink" title="需要注意的问题"></a>需要注意的问题</h2><p>采用非递归方式实现递归程序, 不一定非要用栈, 也可用循环, 如斐波那契数列.</p>
+<p>栈中元素一定保持其输入顺序. 因此出栈时只可能是输入顺序的逆序.</p>
+<h1 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h1><p>操作受限的线性表. 只能在两端进行操作. FIFO.</p>
+<p>队头: <code>front</code>, 允许删除. 队尾: <code>rear</code>, 允许插入.</p>
+<p>答题时可以直接“调用”的函数:</p>
+<ul>
+<li><code>void InitQueue(&amp;Q)</code></li>
+<li><code>bool QueueEmpty(Q)</code></li>
+<li><code>bool EnQueue(&amp;Q, x)</code></li>
+<li><code>bool DeQueue(&amp;Q, &amp;x)</code></li>
+<li><code>bool GetHead(Q, &amp;x)</code></li>
+</ul>
+<h2 id="顺序队列"><a href="#顺序队列" class="headerlink" title="顺序队列"></a>顺序队列</h2><p>数组存放.</p>
+<p><code>front</code> 指向队头元素, <code>rear</code> 指向队尾元素的下一个位置.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> MAXSIZE 100</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> &#123;</span><br><span class="line">    ElemType data[MAXSIZE];</span><br><span class="line">    <span class="type">int</span> front;</span><br><span class="line">    <span class="type">int</span> rear;</span><br><span class="line">&#125; SqQueue;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>初始时: <code>Q.front = Q.rear = 0</code>.</li>
+<li>判空: <code>Q.front == Q.rear</code>.</li>
+<li>插入: <code>Q.data[Q.rear++] = x;</code>.</li>
+<li>删除: <code>x = Q.data[Q.front++];</code>.</li>
+</ul>
+<p>存在「假溢出」, 也就是说数组中明明有位置存储, 却因 <code>front</code> 指针移动到数组末尾而导致无法继续插入.</p>
+<p>改进: 循环队列.</p>
+<h3 id="循环队列"><a href="#循环队列" class="headerlink" title="循环队列"></a>循环队列</h3><ul>
+<li>初始时: <code>Q.front = Q.rear = 0</code>.</li>
+<li>插入: <code>Q.data[Q.rear] = x; Q.rear = (Q.rear + 1) % MAXSIZE</code>.</li>
+<li>删除: <code>x = Q.data[Q.front]; Q.front = (Q.front + 1) % MAXSIZE</code>.</li>
+<li>元素个数: <code>(Q.rear - Q.front + MAXSIZE) % MAXSIZE</code>.</li>
+</ul>
+<p>三种情况:</p>
+<ol>
+<li>牺牲一个存储单元来区分队空和队满.<ul>
+<li>队满: <code>(Q.rear + 1) % MAXSIZE == Q.front</code>.</li>
+<li>队空: <code>Q.front == Q.rear</code>.</li>
+<li>元素个数: <code>(Q.rear - Q.front + MAXSIZE) % MAXSIZE</code>.</li>
+</ul>
+</li>
+<li>类型中增加一个 <code>Q.size</code> 记录元素个数, 用来区分队空和队满.<ul>
+<li>队满: <code>Q.size == MAXSIZE</code>.</li>
+<li>队空: <code>Q.size == 0</code>.</li>
+<li>元素个数: <code>Q.size</code>.</li>
+</ul>
+</li>
+<li>类型中增加一个 <code>Q.tag</code> 记录队列状态, 用来区分队空和队满.<ul>
+<li>每次 <code>EnQueue</code> 成功后令 <code>Q.tag = 1</code>, <code>DeQueue</code> 成功后令 <code>Q.tag = 0</code>.</li>
+<li>以 <code>DeQueue</code> 为例, 先令 <code>Q.tag = 0</code>, 然后执行 <code>Q.front = (Q.front + 1) % MAXSIZE</code>. 此时调用 <code>QueueEmpty(Q)</code> 进行判空: 如果 <code>Q.front == Q.rear &amp;&amp; Q.tag = 0</code>, 则队列为空. 同理, 如果 <code>Q.front == Q.rear &amp;&amp; Q.tag = 1</code>, 则队列为满.</li>
+<li>因此这里的 <code>tag</code> 实际上是表示“上一次执行”的是插入还是删除操作. 如果是执行过一次插入操作后导致的 <code>Q.front == Q.rear</code>, 则队列为满; 如果是执行过一次删除操作后导致的 <code>Q.front == Q.rear</code>, 则队列为空. 因此每调用一次 <code>EnQueue</code> 或 <code>DeQueue</code>, 都要更新 <code>tag</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="双端队列"><a href="#双端队列" class="headerlink" title="双端队列"></a>双端队列</h3><p>允许在两端进行插入和删除操作 (出队和入队) 的队列. 队列的两端分别称为<em>前端</em>和<em>后端</em>.</p>
+<p>逻辑结构是线性结构.</p>
+<p>后端插入的可以从前端删除, 也可以从后端删除.</p>
+<p>双端队列也是操作受限的线性表: 只允许两端插入、两端删除.</p>
+<p>栈和队列都是双端队列的退化. 因此双端队列可以实现栈和队列的功能.</p>
+<p>双端队列也有两个变种: (至于是哪一端其实不重要, 因为是等价的)</p>
+<ul>
+<li>输入受限的双端队列: 一端插入、两端删除.</li>
+<li>输出受限的双端队列: 两端插入、一端删除.</li>
+</ul>
+<p>如果输入没有受限, 则双端队列中的元素不需要按照输入顺序排列.</p>
+<p>如果输出没有受限, 则双端队列中的元素不需要按照输入顺序输出.</p>
+<h2 id="链式队列"><a href="#链式队列" class="headerlink" title="链式队列"></a>链式队列</h2><p>链表存放.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">LinkNode</span> &#123;</span><br><span class="line">    ElemType data;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">LinkNode</span> *next;</span><br><span class="line">&#125; LinkNode;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> &#123;</span><br><span class="line">    LinkNode *front;</span><br><span class="line">    LinkNode *rear;</span><br><span class="line">&#125; LinkQueue;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Stack-和-Queue-的应用"><a href="#Stack-和-Queue-的应用" class="headerlink" title="Stack 和 Queue 的应用"></a>Stack 和 Queue 的应用</h1><p>Stack:</p>
+<ul>
+<li>括号匹配</li>
+<li>表达式求值: 中缀表达式转后缀表达式, 后缀表达式求值<ul>
+<li>中缀表达式就是 <code>A+B*(C-D)-E/F</code>, 写成表达式树后进行后序遍历, 就得到了后缀表达式 <code>ABCD-*+EF/-</code>.</li>
+<li>给出后缀表达式, 可以用栈来计算表达式的值.</li>
+<li>算法: 顺序扫描后序表达式的每一项, 如果是操作数就入栈, 如果是操作符就从栈中弹出两个操作数, 进行运算, 然后将结果入栈. 最后栈中只剩下一个元素, 就是表达式的值.</li>
+</ul>
+</li>
+<li>递归</li>
+</ul>
+<p>Queue:</p>
+<ul>
+<li>层次遍历</li>
+<li>计算机系统:<ul>
+<li>缓冲区</li>
+<li>竞争资源的使用队列</li>
+</ul>
+</li>
+</ul>
+<h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><p>术语: 下标、维界 (下标的取值范围).</p>
+<h2 id="特殊矩阵的压缩存储"><a href="#特殊矩阵的压缩存储" class="headerlink" title="特殊矩阵的压缩存储"></a>特殊矩阵的压缩存储</h2><ul>
+<li>特殊矩阵: 有大量的零元素或相同非零元素的矩阵. 如对称矩阵、上 (下) 三角矩阵、对角矩阵.</li>
+<li>压缩存储: 多个值相同的元素只存储一次.</li>
+</ul>
+<h3 id="对称矩阵"><a href="#对称矩阵" class="headerlink" title="对称矩阵"></a>对称矩阵</h3><p><code>a[n*n]</code> 的对称矩阵: 只存放半个三角形. 假设将下三角区 (a11,a21,a22,a31,a32,a33,…) 存放在一维数组 <code>b[n(n+1)/2]</code> 中, 则 <code>a[i][j]</code> 在 <code>b</code> 中的位置是 <code>b[i*(i-1)/2+j]</code>.</p>
+<blockquote>
+<p><code>i&gt;j</code> 属于下三角区, <code>i=j</code> 属于主对角线, <code>i&lt;j</code> 属于上三角区.</p>
+</blockquote>
+<h3 id="三角矩阵"><a href="#三角矩阵" class="headerlink" title="三角矩阵"></a>三角矩阵</h3><p>三角矩阵是这样的 (以下三角矩阵为例):</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a[n][n]=&#123;</span><br><span class="line">    a11,a12,a13,...,a1n,</span><br><span class="line">    c,  a22,a23,...,a2n,</span><br><span class="line">    c,  c,  a33,...,a3n,</span><br><span class="line">    ...,</span><br><span class="line">    c,  c,  c,  ...,ann</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这里的 c 是常数, 不一定是 0, 和线性代数里的定义不太一样.<br>{: .prompt-warning}</p>
+</blockquote>
+<p><code>a[n*n]</code> 的上三角矩阵: 存放在一维数组 <code>b[n(n+1)/2+1]</code> 中, <code>a[i][j], i&gt;=j</code> 在 <code>b</code> 中的位置是 <code>b[j*(j-1)/2+i]</code>, <code>a[i][j], i&lt;j</code> 在 <code>b</code> 中的位置是 <code>b[n*(n+1)/2]</code>.</p>
+<h3 id="三对角矩阵"><a href="#三对角矩阵" class="headerlink" title="三对角矩阵"></a>三对角矩阵</h3><p>也称为带状矩阵.</p>
+<p>三对角矩阵是这样的:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a[<span class="number">1</span>][<span class="number">1</span>], a[<span class="number">1</span>][<span class="number">2</span>], <span class="number">0</span>, <span class="number">0</span>, ..., <span class="number">0</span>,</span><br><span class="line">a[<span class="number">2</span>][<span class="number">1</span>], a[<span class="number">2</span>][<span class="number">2</span>], a[<span class="number">2</span>][<span class="number">3</span>], <span class="number">0</span>, ..., <span class="number">0</span>,</span><br><span class="line"><span class="number">0</span>, a[<span class="number">3</span>][<span class="number">2</span>], a[<span class="number">3</span>][<span class="number">3</span>], a[<span class="number">3</span>][<span class="number">4</span>], ..., <span class="number">0</span>,</span><br><span class="line">...,</span><br><span class="line"><span class="number">0</span>, <span class="number">0</span>, ..., a[n<span class="number">-1</span>][n<span class="number">-2</span>], a[n<span class="number">-1</span>][n<span class="number">-1</span>], a[n<span class="number">-1</span>][n],</span><br><span class="line"><span class="number">0</span>,  <span class="number">0</span>,  <span class="number">0</span>,  ...,a[n][n<span class="number">-1</span>],a[n][n]</span><br></pre></td></tr></table></figure>
+
+<p>可看作是有三条对角线.</p>
+<p>存储方式: 以行优先存储.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a[<span class="number">1</span>][<span class="number">1</span>], a[<span class="number">1</span>][<span class="number">2</span>], a[<span class="number">2</span>][<span class="number">1</span>], a[<span class="number">2</span>][<span class="number">2</span>], a[<span class="number">2</span>][<span class="number">3</span>], a[<span class="number">3</span>][<span class="number">2</span>], a[<span class="number">3</span>][<span class="number">3</span>], a[<span class="number">3</span>][<span class="number">4</span>], ..., a[n<span class="number">-1</span>][n<span class="number">-2</span>], a[n<span class="number">-1</span>][n<span class="number">-1</span>], a[n<span class="number">-1</span>][n], a[n][n<span class="number">-1</span>], a[n][n]</span><br></pre></td></tr></table></figure>
+
+<p><code>a[i][j]</code> 存储于 <code>b[2i+j-3]</code>.</p>
+<p><code>b[k]</code> 对应的 <code>a[i][j]</code> 是 $i&#x3D;\lfloor\dfrac{k+1}{3}+1\rfloor,j&#x3D;k-2i+3$.</p>
+<p>推导: 对于 <code>a[i][j]</code>, 前面有 i-1 行, 其中第 1 行有 2 个元素, 第 2 到 i-1 行有 3 个元素, 总共有 <code>2+3(i-2)=3i-4</code> 个元素; 在第 i 行, 它的前面有 i-2 个 0, 它自己位于第 j 个位置, 因此是第 i 行的第 <code>j-(i-2)</code> 个非零元素. 于是, <code>a[i][j]</code> 在 <code>b</code> 中是第 <code>3i-4+j-(i-2)=2i+j-2</code> 个元素. 如果 <code>b</code> 从 0 开始存储, 则位于下标 <code>2i+j-3</code> 处.</p>
+<p>逆推也很简单: 已知 k, 那么就是 <code>b</code> 中的第 k+1 个元素. 由于除了第一行以外全都是 3 个元素, 只有第一行是 2 个, 所以暂时先从第 i 行移动一个元素补到第一行, 因此 <code>i-1=(k+1)/3</code>. 这里的除法按照 C++ 标准默认向下取整了, 也可以写得规范一些. i 求出来了, 再通过 <code>k=2i+j-3</code> 就可以求出 j 了.</p>
+<h3 id="稀疏矩阵"><a href="#稀疏矩阵" class="headerlink" title="稀疏矩阵"></a>稀疏矩阵</h3><p>稀疏矩阵是指矩阵中大部分元素都是 0 的矩阵.</p>
+<p>用三元组 (行, 列, 值) 存储.</p>
+<p>十字链表法: 用两个链表存储, 一个链表存储行, 一个链表存储列.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/10/03/2022-10-03-ds%E5%A4%8D%E4%B9%A0-part-2/" data-id="clcljm1k000bj4osb8ulubsox" data-title="DS复习 Part 2" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/notes/" rel="tag">notes</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/10/04/2022-10-04-ds%E5%A4%8D%E4%B9%A0-part-3/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          DS复习 Part 3
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/10/01/2022-10-01-ds%E5%A4%8D%E4%B9%A0-part-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">DS复习 Part 1</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CS/">CS</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mac/">Mac</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Utilities/">Utilities</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%B7%E9%A2%98/">刷题</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%B7%E9%A2%98/ACM/">ACM</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%B7%E9%A2%98/ACM/%E6%96%87%E7%AB%A0/">文章</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%B7%E9%A2%98/ACM/%E6%96%87%E7%AB%A0/AcWing/">AcWing</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%B7%E9%A2%98/AcWing/">AcWing</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%B7%E9%A2%98/AcWing/%E6%96%87%E7%AB%A0/">文章</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%B7%E9%A2%98/PAT/">PAT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%B7%E9%A2%98/%E9%A2%98%E5%8D%95/">题单</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%88%B7%E9%A2%98/%E9%A2%98%E5%8D%95/AcWing/">AcWing</a></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C/">网络</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E5%AD%A6/">数学</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%96%87%E7%AB%A0/">文章</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8B%B1%E8%AF%AD/">英语</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%8B%B1%E8%AF%AD/TED/">TED</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84/">计算机体系结构</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%AD%E8%A8%80/">语言</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%AD%E8%A8%80/C-C/">C/C++</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/01%E8%83%8C%E5%8C%85/" rel="tag">01背包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AVL/" rel="tag">AVL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BFS/" rel="tag">BFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BST/" rel="tag">BST</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DFS/" rel="tag">DFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dijkstra/" rel="tag">Dijkstra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STL/" rel="tag">STL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TSP/" rel="tag">TSP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dp/" rel="tag">dp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/knapsack/" rel="tag">knapsack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/latex/" rel="tag">latex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/notes/" rel="tag">notes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/palindrome/" rel="tag">palindrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reading/" rel="tag">reading</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/snippets/" rel="tag">snippets</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/solutions/" rel="tag">solutions</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tarjan/" rel="tag">tarjan</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/trie/" rel="tag">trie</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%93%E9%A2%98/" rel="tag">专题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/" rel="tag">个人项目</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%8C%E5%88%86/" rel="tag">二分</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E7%B1%BB%E8%AE%A8%E8%AE%BA/" rel="tag">分类讨论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" rel="tag">前缀和</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%BA%E9%97%B4%E9%97%AE%E9%A2%98/" rel="tag">区间问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" rel="tag">单调栈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%93%88%E5%B8%8C/" rel="tag">哈希</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E8%AE%BA/" rel="tag">图论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A0%86/" rel="tag">堆</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%90%E5%BA%8F%E5%88%97/" rel="tag">子序列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag">字符串</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" rel="tag">并查集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BA%8F%E5%85%B3%E7%B3%BB/" rel="tag">序关系</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%90%9C%E7%B4%A2/" rel="tag">搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%97%E7%BB%84%E5%90%88/" rel="tag">数字组合</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E8%AE%BA/" rel="tag">数论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/" rel="tag">最短路径</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%89%E5%9D%91/" rel="tag">有坑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%88/" rel="tag">栈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91/" rel="tag">树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/" rel="tag">树状数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A8%A1%E6%8B%9F/" rel="tag">模拟</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%AE%E7%82%B9%E6%95%B0/" rel="tag">浮点数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/" rel="tag">知识点</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%A2%E9%BB%91%E6%A0%91/" rel="tag">红黑树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag">线段树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/" rel="tag">组合数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B4%AA%E5%BF%83/" rel="tag">贪心</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%92%E5%BD%92/" rel="tag">递归</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%98%9F%E5%88%97/" rel="tag">队列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag">题解</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/01%E8%83%8C%E5%8C%85/" style="font-size: 10px;">01背包</a> <a href="/tags/AVL/" style="font-size: 10.77px;">AVL</a> <a href="/tags/BFS/" style="font-size: 10.77px;">BFS</a> <a href="/tags/BST/" style="font-size: 10px;">BST</a> <a href="/tags/DFS/" style="font-size: 16.15px;">DFS</a> <a href="/tags/Dijkstra/" style="font-size: 11.54px;">Dijkstra</a> <a href="/tags/STL/" style="font-size: 13.08px;">STL</a> <a href="/tags/TSP/" style="font-size: 10.77px;">TSP</a> <a href="/tags/algorithm/" style="font-size: 14.62px;">algorithm</a> <a href="/tags/dp/" style="font-size: 13.08px;">dp</a> <a href="/tags/knapsack/" style="font-size: 10.77px;">knapsack</a> <a href="/tags/latex/" style="font-size: 10px;">latex</a> <a href="/tags/notes/" style="font-size: 19.23px;">notes</a> <a href="/tags/palindrome/" style="font-size: 10px;">palindrome</a> <a href="/tags/reading/" style="font-size: 10px;">reading</a> <a href="/tags/snippets/" style="font-size: 11.54px;">snippets</a> <a href="/tags/solutions/" style="font-size: 10.77px;">solutions</a> <a href="/tags/tarjan/" style="font-size: 10px;">tarjan</a> <a href="/tags/trie/" style="font-size: 10px;">trie</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/%E4%B8%93%E9%A2%98/" style="font-size: 13.85px;">专题</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/" style="font-size: 10px;">个人项目</a> <a href="/tags/%E4%BA%8C%E5%88%86/" style="font-size: 10.77px;">二分</a> <a href="/tags/%E5%88%86%E7%B1%BB%E8%AE%A8%E8%AE%BA/" style="font-size: 10px;">分类讨论</a> <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 11.54px;">前缀和</a> <a href="/tags/%E5%8C%BA%E9%97%B4%E9%97%AE%E9%A2%98/" style="font-size: 10px;">区间问题</a> <a href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" style="font-size: 10px;">单调栈</a> <a href="/tags/%E5%93%88%E5%B8%8C/" style="font-size: 10px;">哈希</a> <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="font-size: 16.92px;">图论</a> <a href="/tags/%E5%A0%86/" style="font-size: 11.54px;">堆</a> <a href="/tags/%E5%AD%90%E5%BA%8F%E5%88%97/" style="font-size: 10.77px;">子序列</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 12.31px;">字符串</a> <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" style="font-size: 12.31px;">并查集</a> <a href="/tags/%E5%BA%8F%E5%85%B3%E7%B3%BB/" style="font-size: 10px;">序关系</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 12.31px;">排序</a> <a href="/tags/%E6%90%9C%E7%B4%A2/" style="font-size: 10.77px;">搜索</a> <a href="/tags/%E6%95%B0%E5%AD%97%E7%BB%84%E5%90%88/" style="font-size: 10px;">数字组合</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 15.38px;">数学</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 17.69px;">数据结构</a> <a href="/tags/%E6%95%B0%E8%AE%BA/" style="font-size: 11.54px;">数论</a> <a href="/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/" style="font-size: 13.08px;">最短路径</a> <a href="/tags/%E6%9C%89%E5%9D%91/" style="font-size: 11.54px;">有坑</a> <a href="/tags/%E6%A0%88/" style="font-size: 10.77px;">栈</a> <a href="/tags/%E6%A0%91/" style="font-size: 18.46px;">树</a> <a href="/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/" style="font-size: 10.77px;">树状数组</a> <a href="/tags/%E6%A8%A1%E6%8B%9F/" style="font-size: 11.54px;">模拟</a> <a href="/tags/%E6%B5%AE%E7%82%B9%E6%95%B0/" style="font-size: 11.54px;">浮点数</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/" style="font-size: 16.92px;">知识点</a> <a href="/tags/%E7%BA%A2%E9%BB%91%E6%A0%91/" style="font-size: 10px;">红黑树</a> <a href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" style="font-size: 10px;">线段树</a> <a href="/tags/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/" style="font-size: 10px;">组合数学</a> <a href="/tags/%E8%B4%AA%E5%BF%83/" style="font-size: 12.31px;">贪心</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 10.77px;">递归</a> <a href="/tags/%E9%98%9F%E5%88%97/" style="font-size: 10px;">队列</a> <a href="/tags/%E9%A2%98%E8%A7%A3/" style="font-size: 20px;">题解</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/10/07/2022-10-07-ds%E5%A4%8D%E4%B9%A0-part-5/">DS复习 Part 5</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/05/2022-10-05-ds%E5%A4%8D%E4%B9%A0-part-4/">DS复习 Part 4</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/04/2022-10-04-ds%E5%A4%8D%E4%B9%A0-part-3/">DS复习 Part 3</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/03/2022-10-03-ds%E5%A4%8D%E4%B9%A0-part-2/">DS复习 Part 2</a>
+          </li>
+        
+          <li>
+            <a href="/2022/10/01/2022-10-01-ds%E5%A4%8D%E4%B9%A0-part-1/">DS复习 Part 1</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
