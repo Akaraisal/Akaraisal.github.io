@@ -19,23 +19,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"akaraisal.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.14.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="焦糖怪獸の小站">
-<meta property="og:url" content="https://akaraisal.github.io/index.html">
+    <meta name="description" content="Gas Station Link 典型的贪心题. 这道题需要思考两点:  能够成为出发点 start 的必要条件: gas[start] &gt;&#x3D; cost[start]. 如果从 start 出发, 到达某一点 i 时, 剩余的油量小于 0, 那么从 start 到 i 之间的任何一个点都不能作为出发点. 此时应考虑将出发点设为 i + 1.  第二条结论的证明:  假设从 start 到 i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LC(国际服)134">
+<meta property="og:url" content="https://akaraisal.github.io/2023/01/08/LC-134/index.html">
 <meta property="og:site_name" content="焦糖怪獸の小站">
+<meta property="og:description" content="Gas Station Link 典型的贪心题. 这道题需要思考两点:  能够成为出发点 start 的必要条件: gas[start] &gt;&#x3D; cost[start]. 如果从 start 出发, 到达某一点 i 时, 剩余的油量小于 0, 那么从 start 到 i 之间的任何一个点都不能作为出发点. 此时应考虑将出发点设为 i + 1.  第二条结论的证明:  假设从 start 到 i">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-01-08T00:26:57.000Z">
+<meta property="article:modified_time" content="2023-01-08T00:46:37.505Z">
 <meta property="article:author" content="Aka">
+<meta property="article:tag" content="贪心">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://akaraisal.github.io/">
+<link rel="canonical" href="https://akaraisal.github.io/2023/01/08/LC-134/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"en","comments":"","permalink":"","path":"index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://akaraisal.github.io/2023/01/08/LC-134/","path":"2023/01/08/LC-134/","title":"LC(国际服)134"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>焦糖怪獸の小站</title>
+<title>LC(国际服)134 | 焦糖怪獸の小站</title>
   
 
 
@@ -68,7 +73,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">焦糖怪獸の小站</h1>
+      <p class="site-title">焦糖怪獸の小站</p>
       <i class="logo-line"></i>
     </a>
   </div>
@@ -94,7 +99,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -107,6 +112,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#gas-station"><span class="nav-number">1.</span> <span class="nav-text">Gas Station</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -162,16 +168,17 @@
 
     </div>
 
-    <div class="main-inner index posts-expand">
+    <div class="main-inner post posts-expand">
 
-    
+
+  
 
 
 <div class="post-block">
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
     <link itemprop="mainEntityOfPage" href="https://akaraisal.github.io/2023/01/08/LC-134/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -185,13 +192,13 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 焦糖怪獸の小站">
+      <meta itemprop="name" content="LC(国际服)134 | 焦糖怪獸の小站">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/01/08/LC-134/" class="post-title-link" itemprop="url">LC(国际服)134</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          LC(国际服)134
+        </h1>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -228,7 +235,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="gas-station">Gas Station</h1>
+        <h1 id="gas-station">Gas Station</h1>
 <p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/gas-station/description/">Link</a></p>
 <p>典型的贪心题.</p>
 <p>这道题需要思考两点:</p>
@@ -243,7 +250,6 @@
 <p>AC 代码:</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">canCompleteCircuit</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; gas, vector&lt;<span class="type">int</span>&gt;&amp; cost)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> n=gas.<span class="built_in">size</span>(),sum=<span class="number">0</span>,cursum=<span class="number">0</span>,start=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;++i)&#123;</span><br><span class="line">            <span class="type">int</span> tmp=gas[i]-cost[i];</span><br><span class="line">            sum+=tmp;</span><br><span class="line">            cursum+=tmp;</span><br><span class="line">            <span class="keyword">if</span>(cursum&lt;<span class="number">0</span>) start=i+<span class="number">1</span>,cursum=<span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(sum&lt;<span class="number">0</span>||start&gt;=n) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">return</span> start;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-      
     </div>
 
     
@@ -251,192 +257,52 @@
     
 
     <footer class="post-footer">
-        <div class="post-eof"></div>
-      
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/preccrep">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/Akaraisal">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E8%B4%AA%E5%BF%83/" rel="tag"># 贪心</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/01/07/%E3%80%90%E5%8A%9B%E6%89%A31803%E3%80%91%E7%BB%9F%E8%AE%A1%E5%BC%82%E6%88%96%E5%80%BC%E5%9C%A8%E8%8C%83%E5%9B%B4%E5%86%85%E7%9A%84%E6%95%B0%E5%AF%B9%E6%9C%89%E5%A4%9A%E5%B0%91/" rel="prev" title="LC(国服)1803">
+                  <i class="fa fa-chevron-left"></i> LC(国服)1803
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
     </footer>
   </article>
 </div>
 
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://akaraisal.github.io/2023/01/07/%E3%80%90%E5%8A%9B%E6%89%A31803%E3%80%91%E7%BB%9F%E8%AE%A1%E5%BC%82%E6%88%96%E5%80%BC%E5%9C%A8%E8%8C%83%E5%9B%B4%E5%86%85%E7%9A%84%E6%95%B0%E5%AF%B9%E6%9C%89%E5%A4%9A%E5%B0%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="Aka">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="焦糖怪獸の小站">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 焦糖怪獸の小站">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/01/07/%E3%80%90%E5%8A%9B%E6%89%A31803%E3%80%91%E7%BB%9F%E8%AE%A1%E5%BC%82%E6%88%96%E5%80%BC%E5%9C%A8%E8%8C%83%E5%9B%B4%E5%86%85%E7%9A%84%E6%95%B0%E5%AF%B9%E6%9C%89%E5%A4%9A%E5%B0%91/" class="post-title-link" itemprop="url">LC(国服)1803</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-01-07 16:50:41" itemprop="dateCreated datePublished" datetime="2023-01-07T16:50:41+08:00">2023-01-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-01-08 08:43:35" itemprop="dateModified" datetime="2023-01-08T08:43:35+08:00">2023-01-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E9%A2%98%E8%A7%A3/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="统计异或值在范围内的数对有多少">统计异或值在范围内的数对有多少</h1>
-<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/count-pairs-with-xor-in-a-range/">Link</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://akaraisal.github.io/2023/01/07/GitHub-Personal-Token%E7%9A%84%E6%AD%A3%E7%A1%AE%E7%94%A8%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="Aka">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="焦糖怪獸の小站">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 焦糖怪獸の小站">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/01/07/GitHub-Personal-Token%E7%9A%84%E6%AD%A3%E7%A1%AE%E7%94%A8%E6%B3%95/" class="post-title-link" itemprop="url">GitHub Personal Token的正确用法</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2023-01-07 16:24:38 / Modified: 16:47:11" itemprop="dateCreated datePublished" datetime="2023-01-07T16:24:38+08:00">2023-01-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8A%98%E8%85%BE/" itemprop="url" rel="index"><span itemprop="name">折腾</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="github-personal-token">GitHub Personal Token</h1>
-<blockquote>
-<p>应用场景：我在配置 Hexo 的 <code>deploy</code> 部分时，不能使用原来的 <code>https://github.com/[your username]/[your repo].git</code> 或 <code>git@github.com:[your username]/[your repo].git</code>，而是要用 <code>https://[your token]@github.com/[your username]/[your repo].git</code>。</p>
-</blockquote>
-<p>在博客根目录下的 <code>_config.yml</code> 文件中，<code>deploy</code> 部分的配置如下：</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://[your</span> <span class="string">token]@github.com/[your</span> <span class="string">username]/[your</span> <span class="string">repo].git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">main</span></span><br></pre></td></tr></table></figure>
-<h1 id="获得-token-的具体操作">获得 Token 的具体操作</h1>
-<p>在 <code>Setting - Developer settings</code> 中就可以找到 <code>Personal access tokens</code>，点击 <code>Generate new token</code>，然后选择需要的权限，这里我只需要 <code>repo</code> 权限，然后点击 <code>Generate token</code>，就会生成一个 <code>token</code>，这个 <code>token</code> 就是你的 <code>Personal access tokens</code>，这个 <code>token</code> 只会显示一次，所以一定要保存好。</p>
-<blockquote>
-<p><code>Developer settings</code> 是 <code>Setting</code> 中的最后一项</p>
-</blockquote>
-<p>我们的目的是想在本机终端实现 GitHub 用户身份的验证，以前需要在终端输入用户名和密码，但是这样的话很麻烦也不安全，现在已经用 <code>Personal access tokens</code> 取代了。</p>
-<p>复制下该 <code>token</code>，于是从本机访问仓库的 URL 就变成了：<code>https://[your token]@github.com/[your username]/[your repo].git</code>，这样就可以实现身份验证并且顺利部署到页面了。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
 
 
 
