@@ -19,23 +19,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"akaraisal.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.14.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="焦糖怪獸の小站">
-<meta property="og:url" content="https://akaraisal.github.io/index.html">
+    <meta name="description" content="POJ 2823 Sliding Window Link 题意 对一个给定的序列，固定窗口大小为 k，让窗口从第一个元素开始，每次向后移动一个元素，因此对于长度为 n 的序列，总共可以得到 n-k+1 个窗口。求每次窗口内元素的最大值和最小值。 思路 下面以求最大值为例： 求窗口内最大值：维护一个单调递减的队列，队首元素为当前窗口内最大值。 - 设窗口在 [l,r]，则队首元素是区间 [l,r]">
+<meta property="og:type" content="article">
+<meta property="og:title" content="单调队列专题">
+<meta property="og:url" content="https://akaraisal.github.io/2023/01/09/%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97%E4%B8%93%E9%A2%98/index.html">
 <meta property="og:site_name" content="焦糖怪獸の小站">
+<meta property="og:description" content="POJ 2823 Sliding Window Link 题意 对一个给定的序列，固定窗口大小为 k，让窗口从第一个元素开始，每次向后移动一个元素，因此对于长度为 n 的序列，总共可以得到 n-k+1 个窗口。求每次窗口内元素的最大值和最小值。 思路 下面以求最大值为例： 求窗口内最大值：维护一个单调递减的队列，队首元素为当前窗口内最大值。 - 设窗口在 [l,r]，则队首元素是区间 [l,r]">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-01-08T18:14:52.000Z">
+<meta property="article:modified_time" content="2023-01-09T03:04:49.532Z">
 <meta property="article:author" content="Aka">
+<meta property="article:tag" content="单调队列">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://akaraisal.github.io/">
+<link rel="canonical" href="https://akaraisal.github.io/2023/01/09/%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97%E4%B8%93%E9%A2%98/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"en","comments":"","permalink":"","path":"index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://akaraisal.github.io/2023/01/09/%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97%E4%B8%93%E9%A2%98/","path":"2023/01/09/单调队列专题/","title":"单调队列专题"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>焦糖怪獸の小站</title>
+<title>单调队列专题 | 焦糖怪獸の小站</title>
   
 
 
@@ -68,7 +73,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">焦糖怪獸の小站</h1>
+      <p class="site-title">焦糖怪獸の小站</p>
       <i class="logo-line"></i>
     </a>
   </div>
@@ -94,7 +99,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -107,6 +112,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#poj-2823-sliding-window"><span class="nav-number">1.</span> <span class="nav-text">POJ 2823 Sliding Window</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E6%84%8F"><span class="nav-number">1.1.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">1.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">1.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B4%9B%E8%B0%B7-p2698-usaco12mar-flowerpot-s"><span class="nav-number">2.</span> <span class="nav-text">洛谷 P2698 [USACO12MAR] Flowerpot S</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E6%84%8F-1"><span class="nav-number">2.1.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="nav-number">2.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81-1"><span class="nav-number">2.3.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -162,16 +168,17 @@
 
     </div>
 
-    <div class="main-inner index posts-expand">
+    <div class="main-inner post posts-expand">
 
-    
+
+  
 
 
 <div class="post-block">
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
     <link itemprop="mainEntityOfPage" href="https://akaraisal.github.io/2023/01/09/%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97%E4%B8%93%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -185,13 +192,13 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 焦糖怪獸の小站">
+      <meta itemprop="name" content="单调队列专题 | 焦糖怪獸の小站">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/01/09/%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97%E4%B8%93%E9%A2%98/" class="post-title-link" itemprop="url">单调队列专题</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          单调队列专题
+        </h1>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -228,7 +235,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="poj-2823-sliding-window">POJ 2823 Sliding Window</h1>
+        <h1 id="poj-2823-sliding-window">POJ 2823 Sliding Window</h1>
 <p><a target="_blank" rel="noopener" href="http://poj.org/problem?id=2823">Link</a></p>
 <h2 id="题意">题意</h2>
 <p>对一个给定的序列，固定窗口大小为 <code>k</code>，让窗口从第一个元素开始，每次向后移动一个元素，因此对于长度为 <code>n</code> 的序列，总共可以得到 <code>n-k+1</code> 个窗口。求每次窗口内元素的最大值和最小值。</p>
@@ -261,7 +268,6 @@
 <h2 id="代码-1">代码</h2>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> INF=<span class="number">2e9</span>,N=<span class="number">1e5</span>+<span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> n,d,L,ans=INF;</span><br><span class="line"><span class="type">int</span> qx[N],qn[N]; <span class="comment">//qx维护最大值，是单减队列；qn维护最小值，是单增队列</span></span><br><span class="line"><span class="type">int</span> hx,hn; <span class="comment">//head of qx,qn</span></span><br><span class="line"><span class="type">int</span> tx,tn; <span class="comment">//tail of qx,qn</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">node</span>&#123;</span><br><span class="line">  <span class="type">int</span> x,y;</span><br><span class="line">  <span class="type">bool</span> <span class="keyword">operator</span>&lt;(node u)<span class="type">const</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x&lt;u.x;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;a[N];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;n,&amp;d);</span><br><span class="line">  <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;++i)</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;a[i].x,&amp;a[i].y);</span><br><span class="line">  <span class="built_in">sort</span>(a+<span class="number">1</span>,a+<span class="number">1</span>+n);</span><br><span class="line">  L=hx=hn=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;++i)&#123;</span><br><span class="line">		<span class="keyword">while</span>(hx&lt;=tx&amp;&amp;a[qx[tx]].y&lt;a[i].y) tx--;</span><br><span class="line">		qx[++tx]=i;</span><br><span class="line">		<span class="keyword">while</span>(hn&lt;=tn&amp;&amp;a[qn[tn]].y&gt;a[i].y) tn--;</span><br><span class="line">		qn[++tn]=i;</span><br><span class="line">		<span class="keyword">while</span>(L&lt;=i&amp;&amp;a[qx[hx]].y-a[qn[hn]].y&gt;=d)&#123;</span><br><span class="line">			ans=<span class="built_in">min</span>(ans,a[i].x-a[L].x);</span><br><span class="line">			L++;</span><br><span class="line">			<span class="keyword">while</span>(hx&lt;=tx&amp;&amp;qx[hx]&lt;L) hx++;</span><br><span class="line">			<span class="keyword">while</span>(hn&lt;=tn&amp;&amp;qn[hn]&lt;L) hn++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,ans==INF?<span class="number">-1</span>:ans);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-      
     </div>
 
     
@@ -269,204 +275,52 @@
     
 
     <footer class="post-footer">
-        <div class="post-eof"></div>
-      
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/preccrep">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/Akaraisal">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97/" rel="tag"># 单调队列</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/01/08/LC-134/" rel="prev" title="LC（国际服）134">
+                  <i class="fa fa-chevron-left"></i> LC（国际服）134
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
     </footer>
   </article>
 </div>
 
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://akaraisal.github.io/2023/01/08/LC-134/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="Aka">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="焦糖怪獸の小站">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 焦糖怪獸の小站">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/01/08/LC-134/" class="post-title-link" itemprop="url">LC（国际服）134</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-01-08 08:26:57" itemprop="dateCreated datePublished" datetime="2023-01-08T08:26:57+08:00">2023-01-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-01-09 02:14:08" itemprop="dateModified" datetime="2023-01-09T02:14:08+08:00">2023-01-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E9%A2%98%E8%A7%A3/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="gas-station">Gas Station</h1>
-<p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/gas-station/description/">Link</a></p>
-<p>典型的贪心题.</p>
-<p>这道题需要思考两点:</p>
-<ul>
-<li>能够成为出发点 <code>start</code> 的必要条件: <code>gas[start] &gt;= cost[start]</code>.</li>
-<li>如果从 <code>start</code> 出发, 到达某一点 <code>i</code> 时, 剩余的油量小于 0, 那么从 <code>start</code> 到 <code>i</code> 之间的任何一个点都不能作为出发点. 此时应考虑将出发点设为 <code>i + 1</code>.</li>
-</ul>
-<p>第二条结论的证明:</p>
-<ul>
-<li>假设从 <code>start</code> 到 <code>i</code> 之间的某个点 <code>j</code> 能够作为出发点, 那么一定有 <code>gas[start] &gt;= cost[start]</code> 和 <code>gas[j] &gt;= cost[j]</code>, 并且从 <code>start</code> 到 <code>j - 1</code> 的 <code>gas[k] - cost[k] (k = start, start+1, ... j-1)</code> 之和一定大于等于 0 (记这个和为 A, A &gt;= 0). 而从 <code>j</code> 到 <code>i</code> 的 <code>gas[k] - cost[k] (k = j, j+1, ... i)</code> 之和一定小于 0 (记这个和为 B, B &lt; 0), 并且 A 的绝对值小于 B 的绝对值. 因此, 减少 <code>start</code> 到 <code>j - 1</code> 这个序列只会让总油量减小而不会增大, 所以 <code>j</code> 不能作为出发点.</li>
-</ul>
-<p>AC 代码:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">canCompleteCircuit</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; gas, vector&lt;<span class="type">int</span>&gt;&amp; cost)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> n=gas.<span class="built_in">size</span>(),sum=<span class="number">0</span>,cursum=<span class="number">0</span>,start=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;++i)&#123;</span><br><span class="line">            <span class="type">int</span> tmp=gas[i]-cost[i];</span><br><span class="line">            sum+=tmp;</span><br><span class="line">            cursum+=tmp;</span><br><span class="line">            <span class="keyword">if</span>(cursum&lt;<span class="number">0</span>) start=i+<span class="number">1</span>,cursum=<span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(sum&lt;<span class="number">0</span>||start&gt;=n) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">return</span> start;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://akaraisal.github.io/2023/01/07/GitHub-Personal-Token%E7%9A%84%E6%AD%A3%E7%A1%AE%E7%94%A8%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="Aka">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="焦糖怪獸の小站">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 焦糖怪獸の小站">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/01/07/GitHub-Personal-Token%E7%9A%84%E6%AD%A3%E7%A1%AE%E7%94%A8%E6%B3%95/" class="post-title-link" itemprop="url">GitHub Personal Token的正确用法</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2023-01-07 16:24:38 / Modified: 16:47:11" itemprop="dateCreated datePublished" datetime="2023-01-07T16:24:38+08:00">2023-01-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8A%98%E8%85%BE/" itemprop="url" rel="index"><span itemprop="name">折腾</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="github-personal-token">GitHub Personal Token</h1>
-<blockquote>
-<p>应用场景：我在配置 Hexo 的 <code>deploy</code> 部分时，不能使用原来的 <code>https://github.com/[your username]/[your repo].git</code> 或 <code>git@github.com:[your username]/[your repo].git</code>，而是要用 <code>https://[your token]@github.com/[your username]/[your repo].git</code>。</p>
-</blockquote>
-<p>在博客根目录下的 <code>_config.yml</code> 文件中，<code>deploy</code> 部分的配置如下：</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://[your</span> <span class="string">token]@github.com/[your</span> <span class="string">username]/[your</span> <span class="string">repo].git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">main</span></span><br></pre></td></tr></table></figure>
-<h1 id="获得-token-的具体操作">获得 Token 的具体操作</h1>
-<p>在 <code>Setting - Developer settings</code> 中就可以找到 <code>Personal access tokens</code>，点击 <code>Generate new token</code>，然后选择需要的权限，这里我只需要 <code>repo</code> 权限，然后点击 <code>Generate token</code>，就会生成一个 <code>token</code>，这个 <code>token</code> 就是你的 <code>Personal access tokens</code>，这个 <code>token</code> 只会显示一次，所以一定要保存好。</p>
-<blockquote>
-<p><code>Developer settings</code> 是 <code>Setting</code> 中的最后一项</p>
-</blockquote>
-<p>我们的目的是想在本机终端实现 GitHub 用户身份的验证，以前需要在终端输入用户名和密码，但是这样的话很麻烦也不安全，现在已经用 <code>Personal access tokens</code> 取代了。</p>
-<p>复制下该 <code>token</code>，于是从本机访问仓库的 URL 就变成了：<code>https://[your token]@github.com/[your username]/[your repo].git</code>，这样就可以实现身份验证并且顺利部署到页面了。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
 
 
 
