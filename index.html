@@ -121,7 +121,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -163,6 +163,98 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://akaraisal.github.io/2023/01/11/%E7%8A%B6%E6%80%81%E6%9C%BA%E6%A8%A1%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Aka">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="焦糖怪獸の小站">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 焦糖怪獸の小站">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/01/11/%E7%8A%B6%E6%80%81%E6%9C%BA%E6%A8%A1%E5%9E%8B/" class="post-title-link" itemprop="url">状态机模型</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2023-01-11 21:34:28 / Modified: 22:05:21" itemprop="dateCreated datePublished" datetime="2023-01-11T21:34:28+08:00">2023-01-11</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>第一次看到 DP 的“状态机模型”这个名字时，竟然有种似曾相识的感觉——啊 这不就是编译原理里面的那个东西么。。。然而我都不记得多少了。</p>
+<h1 id="acwing-1049-大盗阿福">AcWing 1049 大盗阿福</h1>
+<p>先引入一道简单题。这道题我没用状态机就直接做了，后来发现状态机解法很有意思。</p>
+<p><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/1051/">Link</a></p>
+<p><strong>非状态机解法</strong>：和<a href="https://akaraisal.github.io/2023/01/10/%E6%A0%91%E5%BD%A2DP/#%E6%B4%9B%E8%B0%B7-p1352-%E6%B2%A1%E6%9C%89%E4%B8%8A%E5%8F%B8%E7%9A%84%E8%88%9E%E4%BC%9A">我的另一篇题解</a>中的思路相似。线性 DP 直接做。</p>
+<p><code>f[i][0]</code> 表示不选择 <code>i</code> 号店铺，既然不选那么 <code>i-1</code> 就可选可不选，因此状态转移方程就是取 <code>max(f[i-1][0], f[i-1][1])</code>。</p>
+<p><code>f[i][1]</code> 表示选择 <code>i</code> 号店铺，既然已经选了 <code>i</code>，那么 <code>i-1</code> 就一定不能选。因此状态转移方程就是 <code>f[i-1][0] + a[i]</code>。</p>
+<p>AC 代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">100010</span>;</span><br><span class="line"><span class="type">int</span> t,n,a;</span><br><span class="line"><span class="type">int</span> f[N][<span class="number">2</span>];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;t);</span><br><span class="line">	<span class="keyword">while</span>(t--)&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;++i)&#123;</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;a);</span><br><span class="line">			f[i][<span class="number">0</span>]=<span class="built_in">max</span>(f[i<span class="number">-1</span>][<span class="number">0</span>],f[i<span class="number">-1</span>][<span class="number">1</span>]);</span><br><span class="line">			f[i][<span class="number">1</span>]=f[i<span class="number">-1</span>][<span class="number">0</span>]+a;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,<span class="built_in">max</span>(f[n][<span class="number">0</span>],f[n][<span class="number">1</span>]));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>状态机解法</strong>：努力回忆了一下，编译原理里面好像是叫有限状态自动机？没错，状态很好确定，转移条件的有向边似乎不好确定。</p>
+<p>这道题，如果画一个 FSA，可以只有两个状态：<code>i</code>, <code>i-1</code>。转移边为：</p>
+<ul>
+<li>状态 <code>i-1</code> 的 0 出边到状态 <code>i</code>，表示不选择状态 <code>i-1</code>，即不选择 <code>i-1</code> 就可以转移到状态 <code>i</code>；</li>
+<li>状态 <code>i-1</code> 的 1 出边到状态 <code>i-1</code>，即到自己。这是因为 <code>i-1</code> 并不是只表示一个店铺，而是所有和 <code>i-1</code> 具有相同奇偶性的编号的店铺集合。到自己意味着可以到 <code>i-3</code> 或 <code>i+1</code>。</li>
+<li>状态 <code>i</code> 的 0 出边到状态 <code>i-1</code>，1 出边到自己。</li>
+</ul>
+<p>因此，状态转移方程如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f[i] = <span class="built_in">max</span>(f[i<span class="number">-1</span>], f[i<span class="number">-2</span>]+a[i])</span><br></pre></td></tr></table></figure>
+<p>好了，比我上一种解法少了一维了。。。不错不错/滑稽</p>
+<p>代码我就不放出来了，因为根本没写//手动狗头。后面还有更加困难的题呢。</p>
+<blockquote>
+<p>从 <code>i-1</code> 转移到 <code>i</code>，相当于在这两个状态之间走了一条边；那么任何一个选择方案，都能对应这个状态机里长度为 <code>n</code> 的一个走法，反过来一个长度为 <code>n</code> 的走法都相当于一个方案。</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 

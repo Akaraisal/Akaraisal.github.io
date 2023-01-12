@@ -19,25 +19,27 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"akaraisal.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.14.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta property="og:type" content="article">
-<meta property="og:title" content="单调栈">
-<meta property="og:url" content="https://akaraisal.github.io/2023/01/11/%E5%8D%95%E8%B0%83%E6%A0%88/index.html">
+    <meta name="description" content="第一次看到 DP 的“状态机模型”这个名字时，竟然有种似曾相识的感觉——啊 这不就是编译原理里面的那个东西么。。。然而我都不记得多少了。 AcWing 1049 大盗阿福 先引入一道简单题。这道题我没用状态机就直接做了，后来发现状态机解法很有意思。 Link 非状态机解法：和我的另一篇题解中的思路相似。线性 DP 直接做。 f[i][0] 表示不选择 i 号店铺，既然不选那么 i-1 就可选可不选">
+<meta property="og:type" content="article">
+<meta property="og:title" content="状态机模型">
+<meta property="og:url" content="https://akaraisal.github.io/2023/01/11/%E7%8A%B6%E6%80%81%E6%9C%BA%E6%A8%A1%E5%9E%8B/index.html">
 <meta property="og:site_name" content="焦糖怪獸の小站">
+<meta property="og:description" content="第一次看到 DP 的“状态机模型”这个名字时，竟然有种似曾相识的感觉——啊 这不就是编译原理里面的那个东西么。。。然而我都不记得多少了。 AcWing 1049 大盗阿福 先引入一道简单题。这道题我没用状态机就直接做了，后来发现状态机解法很有意思。 Link 非状态机解法：和我的另一篇题解中的思路相似。线性 DP 直接做。 f[i][0] 表示不选择 i 号店铺，既然不选那么 i-1 就可选可不选">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-01-11T06:38:44.000Z">
-<meta property="article:modified_time" content="2023-01-11T06:38:44.534Z">
+<meta property="article:published_time" content="2023-01-11T13:34:28.000Z">
+<meta property="article:modified_time" content="2023-01-11T14:05:21.937Z">
 <meta property="article:author" content="Aka">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://akaraisal.github.io/2023/01/11/%E5%8D%95%E8%B0%83%E6%A0%88/">
+<link rel="canonical" href="https://akaraisal.github.io/2023/01/11/%E7%8A%B6%E6%80%81%E6%9C%BA%E6%A8%A1%E5%9E%8B/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://akaraisal.github.io/2023/01/11/%E5%8D%95%E8%B0%83%E6%A0%88/","path":"2023/01/11/单调栈/","title":"单调栈"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://akaraisal.github.io/2023/01/11/%E7%8A%B6%E6%80%81%E6%9C%BA%E6%A8%A1%E5%9E%8B/","path":"2023/01/11/状态机模型/","title":"状态机模型"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>单调栈 | 焦糖怪獸の小站</title>
+<title>状态机模型 | 焦糖怪獸の小站</title>
   
 
 
@@ -96,7 +98,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -109,6 +111,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#acwing-1049-%E5%A4%A7%E7%9B%97%E9%98%BF%E7%A6%8F"><span class="nav-number">1.</span> <span class="nav-text">AcWing 1049 大盗阿福</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -175,7 +178,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://akaraisal.github.io/2023/01/11/%E5%8D%95%E8%B0%83%E6%A0%88/">
+    <link itemprop="mainEntityOfPage" href="https://akaraisal.github.io/2023/01/11/%E7%8A%B6%E6%80%81%E6%9C%BA%E6%A8%A1%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpeg">
@@ -188,12 +191,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="单调栈 | 焦糖怪獸の小站">
+      <meta itemprop="name" content="状态机模型 | 焦糖怪獸の小站">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          单调栈
+          状态机模型
         </h1>
 
         <div class="post-meta-container">
@@ -203,8 +206,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
+      
 
-      <time title="Created: 2023-01-11 14:38:44" itemprop="dateCreated datePublished" datetime="2023-01-11T14:38:44+08:00">2023-01-11</time>
+      <time title="Created: 2023-01-11 21:34:28 / Modified: 22:05:21" itemprop="dateCreated datePublished" datetime="2023-01-11T21:34:28+08:00">2023-01-11</time>
     </span>
 
   
@@ -217,7 +221,29 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        
+        <p>第一次看到 DP 的“状态机模型”这个名字时，竟然有种似曾相识的感觉——啊 这不就是编译原理里面的那个东西么。。。然而我都不记得多少了。</p>
+<h1 id="acwing-1049-大盗阿福">AcWing 1049 大盗阿福</h1>
+<p>先引入一道简单题。这道题我没用状态机就直接做了，后来发现状态机解法很有意思。</p>
+<p><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/1051/">Link</a></p>
+<p><strong>非状态机解法</strong>：和<a href="https://akaraisal.github.io/2023/01/10/%E6%A0%91%E5%BD%A2DP/#%E6%B4%9B%E8%B0%B7-p1352-%E6%B2%A1%E6%9C%89%E4%B8%8A%E5%8F%B8%E7%9A%84%E8%88%9E%E4%BC%9A">我的另一篇题解</a>中的思路相似。线性 DP 直接做。</p>
+<p><code>f[i][0]</code> 表示不选择 <code>i</code> 号店铺，既然不选那么 <code>i-1</code> 就可选可不选，因此状态转移方程就是取 <code>max(f[i-1][0], f[i-1][1])</code>。</p>
+<p><code>f[i][1]</code> 表示选择 <code>i</code> 号店铺，既然已经选了 <code>i</code>，那么 <code>i-1</code> 就一定不能选。因此状态转移方程就是 <code>f[i-1][0] + a[i]</code>。</p>
+<p>AC 代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">100010</span>;</span><br><span class="line"><span class="type">int</span> t,n,a;</span><br><span class="line"><span class="type">int</span> f[N][<span class="number">2</span>];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;t);</span><br><span class="line">	<span class="keyword">while</span>(t--)&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;++i)&#123;</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;a);</span><br><span class="line">			f[i][<span class="number">0</span>]=<span class="built_in">max</span>(f[i<span class="number">-1</span>][<span class="number">0</span>],f[i<span class="number">-1</span>][<span class="number">1</span>]);</span><br><span class="line">			f[i][<span class="number">1</span>]=f[i<span class="number">-1</span>][<span class="number">0</span>]+a;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,<span class="built_in">max</span>(f[n][<span class="number">0</span>],f[n][<span class="number">1</span>]));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>状态机解法</strong>：努力回忆了一下，编译原理里面好像是叫有限状态自动机？没错，状态很好确定，转移条件的有向边似乎不好确定。</p>
+<p>这道题，如果画一个 FSA，可以只有两个状态：<code>i</code>, <code>i-1</code>。转移边为：</p>
+<ul>
+<li>状态 <code>i-1</code> 的 0 出边到状态 <code>i</code>，表示不选择状态 <code>i-1</code>，即不选择 <code>i-1</code> 就可以转移到状态 <code>i</code>；</li>
+<li>状态 <code>i-1</code> 的 1 出边到状态 <code>i-1</code>，即到自己。这是因为 <code>i-1</code> 并不是只表示一个店铺，而是所有和 <code>i-1</code> 具有相同奇偶性的编号的店铺集合。到自己意味着可以到 <code>i-3</code> 或 <code>i+1</code>。</li>
+<li>状态 <code>i</code> 的 0 出边到状态 <code>i-1</code>，1 出边到自己。</li>
+</ul>
+<p>因此，状态转移方程如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f[i] = <span class="built_in">max</span>(f[i<span class="number">-1</span>], f[i<span class="number">-2</span>]+a[i])</span><br></pre></td></tr></table></figure>
+<p>好了，比我上一种解法少了一维了。。。不错不错/滑稽</p>
+<p>代码我就不放出来了，因为根本没写//手动狗头。后面还有更加困难的题呢。</p>
+<blockquote>
+<p>从 <code>i-1</code> 转移到 <code>i</code>，相当于在这两个状态之间走了一条边；那么任何一个选择方案，都能对应这个状态机里长度为 <code>n</code> 的一个走法，反过来一个长度为 <code>n</code> 的走法都相当于一个方案。</p>
+</blockquote>
 
     </div>
 
@@ -258,14 +284,11 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2023/01/10/%E6%A0%91%E5%BD%A2DP/" rel="prev" title="树形DP">
-                  <i class="fa fa-chevron-left"></i> 树形DP
+                <a href="/2023/01/11/CF-305-Div-1-B-Mike-and-Feet/" rel="prev" title="CF#305 (Div.1) B. Mike and Feet">
+                  <i class="fa fa-chevron-left"></i> CF#305 (Div.1) B. Mike and Feet
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2023/01/11/CF-305-Div-1-B-Mike-and-Feet/" rel="next" title="CF#305 (Div.1) B. Mike and Feet">
-                  CF#305 (Div.1) B. Mike and Feet <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
