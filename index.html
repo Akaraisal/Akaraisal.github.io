@@ -121,18 +121,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -163,6 +163,193 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://akaraisal.github.io/2023/01/14/LC1819/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Aka">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="焦糖怪獸の小站">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 焦糖怪獸の小站">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/01/14/LC1819/" class="post-title-link" itemprop="url">序列中不同最大公约数的数目</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2023-01-14 08:23:34 / Modified: 09:19:28" itemprop="dateCreated datePublished" datetime="2023-01-14T08:23:34+08:00">2023-01-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%A2%98%E8%A7%A3/" itemprop="url" rel="index"><span itemprop="name">题解</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%A2%98%E8%A7%A3/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/number-of-different-subsequences-gcds/description/">Link</a></p>
+<p>一条重要性质：参考<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/number-of-different-subsequences-gcds/solutions/2060230/xu-lie-zhong-bu-tong-zui-da-gong-yue-shu-ha1j/">LC官方解析</a>，个人认为数学证明步骤写得很清楚。</p>
+<p>代码实现有一定的技巧：</p>
+<ul>
+<li>设原序列中的最大值为 <code>maxv</code>；</li>
+<li>因为最大公约数一定小于等于 <code>maxv</code>，所以我们只需要判断区间 <span class="math inline">\([1,maxv]\)</span> 内的所有数能否成为某个子序列的最大公约数；</li>
+<li>于是问题就转化为，对于区间 <span class="math inline">\([1,maxv]\)</span> 内的每个数 i，试图构造一个能够以 i 为最大公约数的子序列；</li>
+<li>具体做法：对 <span class="math inline">\(i\in [1,maxv]\)</span>，遍历 i 的所有小于等于 <code>maxv</code> 的倍数，然后判断这些倍数是否是原序列中的某个数。假设 i 的倍数集合为 A，A 中属于原序列的元素的集合为 B，那么接下来就判断<strong>B 中是否存在两个数 a, b 使得 gcd(a, b) == i</strong>，如果存在就<strong>说明 i 可以作为 B 中元素构成的、并且包含了 a 和 b 的任意子序列的最大公约数</strong>。这就构造出了以 i 为最大公约数的子序列，因此 i 可以作为原序列中某个子序列的最大公约数。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">countDifferentSubsequenceGCDs</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> maxv=*<span class="built_in">max_element</span>(nums.<span class="built_in">begin</span>(),nums.<span class="built_in">end</span>()),ans=<span class="number">0</span>;</span><br><span class="line">        vector&lt;<span class="type">bool</span>&gt;<span class="built_in">v</span>(maxv+<span class="number">1</span>,<span class="literal">false</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> num:nums) v[num]=<span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=maxv;++i)&#123;</span><br><span class="line">            <span class="type">int</span> cur=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j=i;j&lt;=maxv;j+=i)</span><br><span class="line">                <span class="keyword">if</span>(v[j])&#123;</span><br><span class="line">                    cur=cur==<span class="number">0</span>?j:__gcd(cur,j);</span><br><span class="line">                    <span class="keyword">if</span>(cur==i)&#123;</span><br><span class="line">                        ans++;<span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://akaraisal.github.io/2023/01/13/Scrapy%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Aka">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="焦糖怪獸の小站">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 焦糖怪獸の小站">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/01/13/Scrapy%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">Scrapy笔记</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2023-01-13 21:52:36 / Modified: 21:58:45" itemprop="dateCreated datePublished" datetime="2023-01-13T21:52:36+08:00">2023-01-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%88%AC%E8%99%AB/" itemprop="url" rel="index"><span itemprop="name">爬虫</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%88%AC%E8%99%AB/Scrapy/" itemprop="url" rel="index"><span itemprop="name">Scrapy</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>创建一个 <code>Scrapy</code> 项目：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy startproject myproject</span><br></pre></td></tr></table></figure>
+<p>创建一个爬虫：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> myproject</span><br><span class="line">scrapy genspider example example.com</span><br></pre></td></tr></table></figure>
+<p>注意爬虫名字不要和项目名字一样。例如我的项目名字是 <code>tutorial</code>，那么爬虫名字就不能是 <code>tutorial</code>。报错信息如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; scrapy genspider tutorial weibo.com</span><br><span class="line">Cannot create a spider with the same name as your project</span><br></pre></td></tr></table></figure>
+<p>运行爬虫：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy crawl example</span><br></pre></td></tr></table></figure>
+<h2 id="项目结构">项目结构</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">myproject/</span><br><span class="line">    scrapy.cfg            <span class="comment"># 项目配置文件</span></span><br><span class="line">    myproject/            <span class="comment"># 项目包</span></span><br><span class="line">        __init__.py</span><br><span class="line">        items.py          <span class="comment"># 项目的item文件</span></span><br><span class="line">        middlewares.py    <span class="comment"># 项目的中间件文件</span></span><br><span class="line">        pipelines.py      <span class="comment"># 项目的管道文件</span></span><br><span class="line">        settings.py       <span class="comment"># 项目的设置文件</span></span><br><span class="line">        spiders/          <span class="comment"># 项目的爬虫文件夹</span></span><br><span class="line">            __init__.py</span><br><span class="line">            ...</span><br></pre></td></tr></table></figure>
+<h2 id="项目配置">项目配置</h2>
+<p><code>settings.py</code> 文件中包含了项目的配置信息，可以通过 <code>scrapy</code> 命令行工具来查看当前项目的配置信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy settings</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -893,7 +1080,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/01/08/LC-134/" class="post-title-link" itemprop="url">LC（国际服）134</a>
+          <a href="/2023/01/08/LC-134/" class="post-title-link" itemprop="url">Gas Station</a>
         </h2>
 
         <div class="post-meta-container">
@@ -911,7 +1098,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-01-09 02:14:08" itemprop="dateModified" datetime="2023-01-09T02:14:08+08:00">2023-01-09</time>
+      <time title="Modified: 2023-01-14 08:24:05" itemprop="dateModified" datetime="2023-01-14T08:24:05+08:00">2023-01-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -969,97 +1156,9 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://akaraisal.github.io/2023/01/07/GitHub-Personal-Token%E7%9A%84%E6%AD%A3%E7%A1%AE%E7%94%A8%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="Aka">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="焦糖怪獸の小站">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 焦糖怪獸の小站">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/01/07/GitHub-Personal-Token%E7%9A%84%E6%AD%A3%E7%A1%AE%E7%94%A8%E6%B3%95/" class="post-title-link" itemprop="url">GitHub Personal Token的正确用法</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2023-01-07 16:24:38 / Modified: 16:47:11" itemprop="dateCreated datePublished" datetime="2023-01-07T16:24:38+08:00">2023-01-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%8A%98%E8%85%BE/" itemprop="url" rel="index"><span itemprop="name">折腾</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="github-personal-token">GitHub Personal Token</h1>
-<blockquote>
-<p>应用场景：我在配置 Hexo 的 <code>deploy</code> 部分时，不能使用原来的 <code>https://github.com/[your username]/[your repo].git</code> 或 <code>git@github.com:[your username]/[your repo].git</code>，而是要用 <code>https://[your token]@github.com/[your username]/[your repo].git</code>。</p>
-</blockquote>
-<p>在博客根目录下的 <code>_config.yml</code> 文件中，<code>deploy</code> 部分的配置如下：</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://[your</span> <span class="string">token]@github.com/[your</span> <span class="string">username]/[your</span> <span class="string">repo].git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">main</span></span><br></pre></td></tr></table></figure>
-<h1 id="获得-token-的具体操作">获得 Token 的具体操作</h1>
-<p>在 <code>Setting - Developer settings</code> 中就可以找到 <code>Personal access tokens</code>，点击 <code>Generate new token</code>，然后选择需要的权限，这里我只需要 <code>repo</code> 权限，然后点击 <code>Generate token</code>，就会生成一个 <code>token</code>，这个 <code>token</code> 就是你的 <code>Personal access tokens</code>，这个 <code>token</code> 只会显示一次，所以一定要保存好。</p>
-<blockquote>
-<p><code>Developer settings</code> 是 <code>Setting</code> 中的最后一项</p>
-</blockquote>
-<p>我们的目的是想在本机终端实现 GitHub 用户身份的验证，以前需要在终端输入用户名和密码，但是这样的话很麻烦也不安全，现在已经用 <code>Personal access tokens</code> 取代了。</p>
-<p>复制下该 <code>token</code>，于是从本机访问仓库的 URL 就变成了：<code>https://[your token]@github.com/[your username]/[your repo].git</code>，这样就可以实现身份验证并且顺利部署到页面了。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
 
 </div>
   </main>
@@ -1107,7 +1206,7 @@
 
   
 
-  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
 <script src="/js/third-party/math/mathjax.js"></script>
 
 
